@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const heroTimeline = gsap.timeline();
 
         heroTimeline
-            .from('.badge-pill', { y: -20, opacity: 0, duration: 0.8, ease: 'power3.out' })
-            .from('.hero-title', { y: 30, opacity: 0, duration: 1, ease: 'power3.out' }, '-=0.6')
-            .from('.hero-subtitle', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-            .from('.hero-btns a', { y: 20, opacity: 0, duration: 0.6, stagger: 0.2, ease: 'back.out(1.7)' }, '-=0.4')
-            .from('.hero-stats', { opacity: 0, duration: 0.8 }, '-=0.4')
-            .from('.main-hero-img', { x: 50, opacity: 0, rotationY: 15, duration: 1.2, ease: 'power3.out' }, '-=1')
-            .from('.floating-card', { y: 30, opacity: 0, scale: 0.8, stagger: 0.15, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.8')
-            .from('.floating-illustration', { y: 40, opacity: 0, scale: 0.9, duration: 1, ease: 'power3.out' }, '-=0.6');
+            .from('.badge-pill', { y: -20, opacity: 1, duration: 0.8, ease: 'power3.out' })
+            .from('.hero-title', { y: 30, opacity: 1, duration: 1, ease: 'power3.out' }, '-=0.6')
+            .from('.hero-subtitle', { y: 20, opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+            .from('.hero-btns a', { y: 20, opacity: 1, duration: 0.6, stagger: 0.2, ease: 'back.out(1.7)' }, '-=0.4')
+            .from('.hero-stats', { opacity: 1, duration: 0.8 }, '-=0.4')
+            .from('.main-hero-img', { x: 50, opacity: 1, rotationY: 15, duration: 1.2, ease: 'power3.out' }, '-=1')
+            .from('.floating-card', { y: 30, opacity: 1, scale: 0.8, stagger: 0.15, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.8')
+            .from('.floating-illustration', { y: 40, opacity: 1, scale: 0.9, duration: 1, ease: 'power3.out' }, '-=0.6');
     }
 
     // 2. Scroll Animations with Intersection Observer (Performance)
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 85%',
                 },
                 y: 40,
-                opacity: 0,
+                opacity: 1,
                 duration: 0.8,
                 ease: 'power3.out'
             });
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 80%',
             },
             y: 50,
-            opacity: 0,
+            opacity: 1,
             duration: 0.8,
             stagger: 0.15,
             ease: 'power3.out'
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 80%',
             },
             y: 60,
-            opacity: 0,
+            opacity: 1,
             duration: 0.8,
             stagger: 0.2,
             ease: 'power3.out'
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 80%',
             },
             scale: 0.95,
-            opacity: 0,
+            opacity: 1,
             duration: 0.8,
             ease: 'power3.out'
         });
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     start: 'top 70%',
                 },
                 y: 60,
-                opacity: 0,
+                opacity: 1,
                 duration: 0.8,
                 stagger: 0.2,
                 ease: 'power3.out'
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Period Update
                     gsap.to(periodEl, {
-                        opacity: 0,
+                        opacity: 1,
                         duration: 0.2,
                         onComplete: () => {
                             periodEl.textContent = isYearly ? '/yr' : '/mo';

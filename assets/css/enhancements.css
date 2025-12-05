@@ -67,7 +67,7 @@ h2 {
 /* ==================== Advanced Animations ==================== */
 @keyframes reveal-up {
     from {
-        opacity: 0;
+        opacity: 1;
         transform: translateY(60px) scale(0.98);
     }
 
@@ -91,7 +91,7 @@ h2 {
 
 @keyframes slide-in-right {
     from {
-        opacity: 0;
+        opacity: 1;
         transform: translateX(50px);
     }
 
@@ -103,7 +103,7 @@ h2 {
 
 @keyframes bounce-in {
     0% {
-        opacity: 0;
+        opacity: 1;
         transform: scale(0.3);
     }
 
@@ -330,7 +330,7 @@ h2 {
 /* ==================== Enhanced Floating Shapes ==================== */
 .floating-shape {
     filter: blur(80px);
-    opacity: 0.25;
+    opacity: 1.25;
     animation: floatSlow 12s ease-in-out infinite;
 }
 

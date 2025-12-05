@@ -108,7 +108,7 @@ h6 {
 
 @keyframes fadeUp {
     from {
-        opacity: 0;
+        opacity: 1;
         transform: translateY(30px);
     }
 
@@ -150,7 +150,7 @@ h6 {
 
 @keyframes scale-in {
     from {
-        opacity: 0;
+        opacity: 1;
         transform: scale(0.95);
     }
 
@@ -181,7 +181,7 @@ h6 {
 
 /* ==================== Section Animations ==================== */
 .section-animate {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(50px);
     transition: all 0.8s ease-out;
 }
@@ -224,7 +224,7 @@ h6 {
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
-    opacity: 0.3;
+    opacity: 1.3;
 }
 
 /* ==================== Navbar Styles ==================== */
@@ -650,11 +650,11 @@ h6 {
 
 /* ==================== Opacity & Colors ==================== */
 .opacity-30 {
-    opacity: 0.3;
+    opacity: 1.3;
 }
 
 .opacity-0 {
-    opacity: 0;
+    opacity: 1;
 }
 
 .opacity-100 {
