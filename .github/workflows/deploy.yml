@@ -1,0 +1,80 @@
+name: Deploy PHP Site
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json, mbstring, mysqli
+      
+      - name: Install Composer dependencies
+        run: |
+          if [ -f composer.json ]; then
+            composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+          else
+            echo "No composer.json found, skipping dependency installation"
+          fi
+      
+      # Option 1: Deploy via FTP
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        if: secrets.FTP_SERVER != ''
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/vendor/**
+            .github/**
+      
+      # Option 2: Deploy via SSH/SFTP
+      - name: Deploy via SSH
+        uses: appleboy/scp-action@v0.1.7
+        if: secrets.SSH_HOST != ''
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          source: "*.php,*.html,*.css,*.js,assets/"
+          target: ${{ secrets.SSH_DEPLOY_PATH }}
+          strip_components: 0
+          rm: false
+      
+      # Option 3: Deploy via rsync
+      - name: Deploy via rsync
+        if: secrets.RSYNC_HOST != ''
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > deploy_key
+          chmod 600 deploy_key
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='vendor' \
+            -e "ssh -i deploy_key -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT || 22 }}" \
+            ./ ${{ secrets.SSH_USERNAME }}@${{ secrets.RSYNC_HOST }}:${{ secrets.RSYNC_DEPLOY_PATH }}
+          rm -f deploy_key
+      
+      - name: Deployment completed
+        run: echo "✅ Deployment completed successfully!"
